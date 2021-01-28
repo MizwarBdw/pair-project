@@ -2,14 +2,16 @@ const express = require('express')
 const router = express.Router()
 const Controller = require('../controllers/store-control')
 
-router.get('/store', Controller.getStoreList)
+router.get('/stores', Controller.getStoreList)
 
-router.get('/store/add', Controller.getAddStore)
-router.post('/store/add', Controller.postAddStore)
+router.get('/stores/add', Controller.getAddStore)
+router.post('/stores/add', Controller.postAddStore)
 
-router.get('/store/edit/:id', Controller.getEditStore)
-router.post('/store/edit/:id', Controller.postEditStore)
+router.get('/stores/edit/:id', Controller.getEditStore)
+router.post('/stores/edit/:id', Controller.postEditStore)
 
-router.get('store/delete/:id', Controller.getDestroyStore)
+router.get('/stores/delete/:id', Controller.getDestroyStore)
+
+router.post('/stores/postEvent', )
 
 module.exports = router

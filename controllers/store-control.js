@@ -1,32 +1,91 @@
+const {Store} = require('../models/index')
+
 class Controller {
-    static getStoreList(){
+    static getStoreList(req,res){
+        Store.findAll()
+        .then(data => {
+            res.render('show-store-list', {
+                title : 'STORE LIST',
+                dataStores: data
+            })
+        })
+
+        .catch(err => {
+            res.send(err)
+        })
 
     }
 
     //===========================================================
 
-    static getAddStore(){
-
+    static getAddStore(req, res){
+        res.render('form-store-add', {
+            title:' ADD STORE'
+        })
     }
 
-    static postAddStore(){
-
+    static postAddStore(req, res){
+        Store.create(req.body)
+        .then(data => {
+            res.redirect('/stores')
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     //===========================================================
 
-    static getEditStore(){
-
+    static getEditStore(req, res){
+        Store.findAll({
+            where: {
+                id: +req.params.id
+            }
+        })
+        .then(data => {
+            res.render('form-edit-store', {
+                title: 'Edit Store',
+                data
+            })
+        })
+        
+        .catch(err => {
+            res.send(err)
+        })
     }
 
-    static postEditStore(){
+    static postEditStore(req, res){
+        Store.update(req.body, {
+            where: {
+                id: +req.params.id
+            }
+        })
 
+        .then(data => {
+            res.redirect('/stores')
+        })
+
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     //===========================================================
 
-    static getDestroyStore(){
+    static getDestroyStore(req, res){
+        Store.destroy({
+            where: {
+                id: +req.params.id
+            }
+        })
 
+        .then(() => {
+            res.redirect('/stores')
+        })
+
+        .catch(err => {
+            res.send(err)
+        })
     }
 }
 

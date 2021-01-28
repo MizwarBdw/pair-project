@@ -14,10 +14,25 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Store.init({
-    name: DataTypes.STRING,
+    name: {
+      type :DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
     type: DataTypes.STRING,
-    information: DataTypes.STRING,
-    location: DataTypes.STRING
+    information: {
+      type :DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    location: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    }
   }, {
     sequelize,
     modelName: 'Store',
